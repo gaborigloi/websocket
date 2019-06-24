@@ -18,6 +18,7 @@ import (
 	"net/url"
 	"strings"
 	"time"
+  "os"
 )
 
 // ErrBadHandshake is returned when the server response to opening handshake is
@@ -328,6 +329,7 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 	conn := newConn(netConn, false, d.ReadBufferSize, d.WriteBufferSize, d.WriteBufferPool, nil, nil)
 
   fmt.Println("XXX Writing request headers:", req)
+  req.Write(os.Stdout)
 	if err := req.Write(netConn); err != nil {
 		return nil, nil, err
 	}
