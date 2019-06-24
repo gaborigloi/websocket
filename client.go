@@ -5,6 +5,7 @@
 package websocket
 
 import (
+  "fmt"
 	"bytes"
 	"context"
 	"crypto/tls"
@@ -326,6 +327,7 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 
 	conn := newConn(netConn, false, d.ReadBufferSize, d.WriteBufferSize, d.WriteBufferPool, nil, nil)
 
+  fmt.Println("XXX Writing request headers:", req)
 	if err := req.Write(netConn); err != nil {
 		return nil, nil, err
 	}
